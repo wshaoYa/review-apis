@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+// 定义包名
+package api.review.v1;
+import "errors/errors.proto";
+
+// 多语言特定包名，用于源代码引用
+option go_package = "reviewService/api/review/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.review.v1";
+
+
+
+enum ErrorReason {
+  // 设置缺省错误码
+  option (errors.default_code) = 500;
+
+  // 为某个枚举单独设置错误码
+  REVIEW_NOT_FOUND = 0 [(errors.code) = 404];
+
+  CONTENT_MISSING = 1 [(errors.code) = 400];
+
+  //  订单已被评价
+  ORDER_REVIEWED = 100 [(errors.code) = 400];
+
+  //  内部错误
+  INTERNAL_ERROR = 101 [(errors.code) = 500];
+
+  //  评价已被商家回复过
+  HAS_BEEN_REPLIED = 102 [(errors.code) = 400];
+
+  //  错误的请求参数
+  INVALID_PARAM = 103 [(errors.code) = 400];
+
+  //  评价已被商家申诉过
+  HAS_BEEN_APPEALED = 104 [(errors.code) = 400];
+
+  // 申诉不存在
+  APPEAL_NOT_FOUND = 105 [(errors.code) = 404];
+
+  // 申诉已审核
+  APPEAL_HAS_BEEN_AUDIT = 106 [(errors.code) = 404];
+}
