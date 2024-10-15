@@ -17,6 +17,8 @@ service Review {
   rpc GetReview (GetReviewRequest) returns (GetReviewReply);
   rpc ListReview (ListReviewRequest) returns (ListReviewReply);
 
+  // C端 依据商家ID 查看评论列表
+  rpc ListReviewByStoreID (ListReviewByStoreIDRequest) returns (ListReviewByStoreIDReply) {}
 
   // B端 回复评价
   rpc ReplyReview (ReplyReviewRequest) returns (ReplyReviewReply);
@@ -29,8 +31,26 @@ service Review {
 
   // O端 审核申诉
   rpc AuditAppeal (AuditAppealRequest) returns (AuditAppealReply);
+
+
 }
 
+// 评价信息
+message ReviewInfo{
+  int64 reviewID = 1;
+  int64 userID = 2;
+  int64 orderID = 3;
+  int32 score = 4;
+  int32 serviceScore = 5;
+  int32 expressScore = 6;
+  string content = 7;
+  string picInfo = 8;
+  string videoInfo = 9;
+  int32 status = 10;
+}
+
+// C端
+// 创建评价
 message CreateReviewRequest {
   int64 userID = 1 [(validate.rules).int64 = {gt: 0}];
   int64 orderID = 2 [(validate.rules).int64 = {gt: 0}];
@@ -45,6 +65,16 @@ message CreateReviewRequest {
 }
 message CreateReviewReply {
   int64 reviewID = 1;
+}
+
+// 依据商家ID 查看评论列表
+message ListReviewByStoreIDRequest {
+  int64 storeID = 1 [(validate.rules).int64 = {gt: 0}];
+  int32 page = 2 [(validate.rules).int64 = {gt: 0}];
+  int32 size = 3 [(validate.rules).int64 = {gt: 0}];
+}
+message ListReviewByStoreIDReply {
+  repeated ReviewInfo list = 1;
 }
 
 message UpdateReviewRequest {}
@@ -113,3 +143,4 @@ message AuditAppealRequest{
 }
 message AuditAppealReply{
 }
+

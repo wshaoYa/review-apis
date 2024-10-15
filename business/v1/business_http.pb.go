@@ -31,8 +31,8 @@ type BusinessHTTPServer interface {
 
 func RegisterBusinessHTTPServer(s *http.Server, srv BusinessHTTPServer) {
 	r := s.Route("/")
-	r.POST("b/v1/review/reply", _Business_ReplyReview0_HTTP_Handler(srv))
-	r.POST("b/v1/review/appeal", _Business_AppealReview0_HTTP_Handler(srv))
+	r.POST("/b/v1/review/reply", _Business_ReplyReview0_HTTP_Handler(srv))
+	r.POST("/b/v1/review/appeal", _Business_AppealReview0_HTTP_Handler(srv))
 }
 
 func _Business_ReplyReview0_HTTP_Handler(srv BusinessHTTPServer) func(ctx http.Context) error {
@@ -94,7 +94,7 @@ func NewBusinessHTTPClient(client *http.Client) BusinessHTTPClient {
 
 func (c *BusinessHTTPClientImpl) AppealReview(ctx context.Context, in *AppealReviewRequest, opts ...http.CallOption) (*AppealReviewReply, error) {
 	var out AppealReviewReply
-	pattern := "b/v1/review/appeal"
+	pattern := "/b/v1/review/appeal"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBusinessAppealReview))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -107,7 +107,7 @@ func (c *BusinessHTTPClientImpl) AppealReview(ctx context.Context, in *AppealRev
 
 func (c *BusinessHTTPClientImpl) ReplyReview(ctx context.Context, in *ReplyReviewRequest, opts ...http.CallOption) (*ReplyReviewReply, error) {
 	var out ReplyReviewReply
-	pattern := "b/v1/review/reply"
+	pattern := "/b/v1/review/reply"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBusinessReplyReview))
 	opts = append(opts, http.PathTemplate(pattern))

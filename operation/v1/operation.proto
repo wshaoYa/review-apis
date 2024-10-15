@@ -13,7 +13,7 @@ service Operation {
   // 审核评价
   rpc AuditReview (AuditReviewRequest) returns (AuditReviewReply) {
     option (google.api.http) = {
-      post: "o/v1/review/audit",
+      post: "/o/v1/review/audit",
       body: "*"
     };
   }
@@ -21,7 +21,7 @@ service Operation {
   // 审核申诉
   rpc AuditAppeal (AuditAppealRequest) returns (AuditAppealReply) {
     option (google.api.http) = {
-      post: "o/v1/appeal/audit",
+      post: "/o/v1/appeal/audit",
       body: "*"
     };
   }

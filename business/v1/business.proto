@@ -13,7 +13,7 @@ service Business {
   // 回复评价
   rpc ReplyReview(ReplyReviewRequest) returns (ReplyReviewReply){
     option (google.api.http) = {
-      post: "b/v1/review/reply",
+      post: "/b/v1/review/reply",
       body: "*"
     };
   }
@@ -21,7 +21,7 @@ service Business {
   // 申诉评价
   rpc AppealReview(AppealReviewRequest)returns (AppealReviewReply){
     option (google.api.http) = {
-      post: "b/v1/review/appeal",
+      post: "/b/v1/review/appeal",
       body: "*"
     };
   }
